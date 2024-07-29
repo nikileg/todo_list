@@ -1,14 +1,11 @@
 # Use an official OpenJDK 8 image as the base
-FROM openjdk:8
+FROM sbtscala/scala-sbt:eclipse-temurin-17.0.4_1.7.1_3.2.0
 
 # Set the working directory to /app
 WORKDIR /app
 
 # Copy the project files
 COPY . /app
-
-# Install sbt
-RUN curl -L -o sbt.deb https://dl.bintray.com/sbt/debian/sbt.deb && dpkg -i sbt.deb && rm sbt.deb
 
 # Compile the project
 RUN sbt compile
