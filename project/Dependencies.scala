@@ -16,6 +16,6 @@ object Dependencies {
     "org.http4s" %% "http4s-server"       % http4sVersion,
   )
 
-  val backendDeps = Seq(cats, newtype)
-    ++ http4sDeps
+  val backendDeps = Seq(cats, newtype) ++
+    http4sDeps
 }

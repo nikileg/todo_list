@@ -14,4 +14,4 @@ RUN sbt -J-Xmx400m compile
 EXPOSE 9000 80 443
 
 # Set the command to run the application
-CMD ["sbt", "run"]
+CMD ["sbt", "-J-Xmx400m", "run"]

@@ -9,13 +9,13 @@ import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Router
 
 object Routes {
-  def helloRoute[F[_]: Monad] = HttpRoutes.of {
+  def helloRoute = HttpRoutes.of[IO] {
     case GET -> Root / "hello" =>
       Ok(s"Hello, World!")
   }
 
-  def httpApp[F[_]: Monad] = Router("/" -> helloRoute).orNotFound
-  def server[F[_]: Async] = EmberServerBuilder
+  def httpApp = Router("/" -> helloRoute).orNotFound
+  def server = EmberServerBuilder
     .default[IO]
     .withHost(ipv4"0.0.0.0")
     .withPort(port"443")
