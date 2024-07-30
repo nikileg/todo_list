@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Compile the project
-RUN sbt J-Xmx512m compile
+RUN sbt -J-Xmx512m compile
 
 # Expose the port for the application
 EXPOSE 9000
