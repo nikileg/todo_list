@@ -8,10 +8,10 @@ WORKDIR /app
 COPY . /app
 
 # Compile the project
-RUN sbt -J-Xmx512m compile
+RUN sbt -J-Xmx400m compile
 
 # Expose the port for the application
-EXPOSE 9000
+EXPOSE 9000, 80, 443
 
 # Set the command to run the application
 CMD ["sbt", "run"]
