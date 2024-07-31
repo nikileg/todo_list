@@ -11,7 +11,7 @@ COPY . /app
 RUN sbt -J-Xmx400m compile
 
 # Expose the port for the application
-EXPOSE 8080
+EXPOSE 8080 443
 
 # Set the command to run the application
 CMD ["sbt", "-J-Xmx400m", "run"]
