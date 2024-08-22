@@ -7,5 +7,6 @@ ThisBuild / scalaVersion := "2.13.10"
 lazy val root = (project in file("."))
   .settings(
     name := "todo_list",
-    libraryDependencies ++= backendDeps
+    libraryDependencies ++= backendDeps,
+    Compile / run / fork := true
   )
