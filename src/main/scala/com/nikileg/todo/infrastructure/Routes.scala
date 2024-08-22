@@ -12,8 +12,10 @@ import scala.jdk.CollectionConverters._
 
 object Routes {
   def helloRoute = HttpRoutes.of[IO] {
-    case GET -> Root / "hello" =>
-      Ok(s"Hello, World!")
+    case GET -> Root / "healthz" =>
+      Ok(s"Im alright!")
+    case GET -> Root =>
+      Ok("Hello, World!")
   }
 
   private def portFromEnv = System.getenv().asScala.get("PORT").flatMap(Port.fromString)
@@ -28,7 +30,7 @@ object Routes {
         .withPort(portFromEnv.getOrElse(port"8080"))
         .withHttpApp(httpApp)
         .build
-        .evalTap(s => logger.info(s"Listening on ${s.address.getHostName}:${s.address.getPort}"))
+        .evalTap(s => IO.println(s"Listening on ${s.address.getHostName}:${s.address.getPort}"))
     }
   }
 }
