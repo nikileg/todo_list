@@ -2,12 +2,14 @@ package com.nikileg.todo.infrastructure
 
 import cats.effect._
 import com.comcast.ip4s._
+import com.nikileg.todo.domain.TodoRepository
 import org.http4s._
 import org.http4s.dsl.io._
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Router
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 
+import java.util.UUID
 import scala.jdk.CollectionConverters._
 
 object Routes {
@@ -16,6 +18,16 @@ object Routes {
       Ok(s"Im alright!")
     case GET -> Root =>
       Ok("Hello, World!")
+  }
+
+  def listRoute(service: TodoRepository[IO]) = HttpRoutes.of[IO] {
+    case GET -> Root / "list" / id =>
+      service
+        .getById(UUID.fromString(id))
+        .flatMap {
+          case Some(list) => Ok(list.toString)
+          case None => NotFound()
+        }
   }
 
   private def portFromEnv = System.getenv().asScala.get("PORT").flatMap(Port.fromString)
