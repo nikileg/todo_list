@@ -8,6 +8,7 @@ import org.http4s.dsl.io._
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Router
 import org.typelevel.log4cats.slf4j.Slf4jLogger
+import cats.implicits._
 
 import java.util.UUID
 import scala.jdk.CollectionConverters._
@@ -25,7 +26,7 @@ object Routes {
       service
         .getById(UUID.fromString(id))
         .flatMap {
-          case Some(list) => Ok(list.toString)
+          case Some(list) => Ok(list.show)
           case None => NotFound()
         }
   }

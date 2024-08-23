@@ -3,6 +3,7 @@ import sbt._
 //noinspection SpellCheckingInspection,TypeAnnotation
 object Dependencies {
   val http4sVersion = "0.23.27"
+  val doobieVersion = "1.0.0-RC4"
 
   val cats = "org.typelevel" %% "cats-core" % "2.12.0"
   val newtype = "io.estatico" %% "newtype" % "0.4.4"
@@ -10,6 +11,12 @@ object Dependencies {
   val logDeps = Seq(
     "org.typelevel" %% "log4cats-core" % "2.7.0",
     "org.typelevel" %% "log4cats-slf4j" % "2.7.0",
+  )
+
+  val doobieDeps = Seq(
+    "org.tpolecat" %% "doobie-core" % doobieVersion,
+    "org.tpolecat" %% "doobie-hikari" % doobieVersion, // HikariCP transactor.
+    "org.tpolecat" %% "doobie-postgres" % doobieVersion,
   )
 
   private val http4sDeps = Seq(
@@ -23,5 +30,6 @@ object Dependencies {
 
   val backendDeps = Seq(cats, newtype) ++
     logDeps ++
-    http4sDeps
+    http4sDeps ++
+    doobieDeps
 }
