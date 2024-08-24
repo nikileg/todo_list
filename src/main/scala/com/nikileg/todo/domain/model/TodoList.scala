@@ -15,7 +15,7 @@ object TodoList {
   implicit def show: Show[TodoList] = Show.show(tl =>
     s"""
       |TodoList:
-      | ${tl.items.map(_.show).mkString("\n")}
+      |${tl.items.map(_.show).mkString("\t", "\n\t", "")}
       |""".stripMargin)
 }
 
